@@ -1,3 +1,9 @@
+import { TabSwitcher } from '@/components/ui/tabs/Tabs'
+
 export function App() {
-  return <div>Hello</div>
+  return (
+    <div>
+      <TabSwitcher />
+    </div>
+  )
 }

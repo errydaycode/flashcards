@@ -1,0 +1,32 @@
+.TabsTrigger {
+  margin-top: 10px;
+  font-family: inherit;
+  background-color: black;
+  padding: 0 20px;
+  height: 45px;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+  line-height: 1;
+  color: var(--mauve-11);
+  border: 1px solid var(--color-dark-300);
+  user-select: none;
+
+  &:hover {
+    color: var(--color-light-900);
+    background: var(--color-dark-100);
+  }
+  &[data-state='active'] {
+    color: var(--violet-11);
+    background: var(--color-accent-500);
+  }
+  &[data-disabled] {
+    color: var(--color-dark-300);
+    background: var(--color-dark-700);
+  }
+  &:focus {
+    position: relative;
+    box-shadow: 0 0 0 2px black;
+  }
+}
