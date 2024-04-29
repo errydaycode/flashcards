@@ -11,6 +11,9 @@ const meta = {
 
 type Story = StoryObj<typeof meta>
 
-export const Primary: Story = {
-  args: {},
+export const DefaultInput: Story = {
+  args: {
+    label: 'Input',
+    placeholder: 'Input',
+  },
 }
