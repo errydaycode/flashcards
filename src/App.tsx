@@ -2,8 +2,8 @@ import { Input } from '@/components/ui/input'
 
 export function App() {
   return (
-    <div>
-      <Input />
+    <div style={{ width: '250px' }}>
+      <Input label={'email'} />
     </div>
   )
 }

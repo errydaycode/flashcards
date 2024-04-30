@@ -11,9 +11,19 @@ const meta = {
 
 type Story = StoryObj<typeof meta>
 
-export const DefaultInput: Story = {
+export const Defaul: Story = {
   args: {
     label: 'Input',
     placeholder: 'Input',
+    width: '284px',
+  },
+}
+
+export const Error: Story = {
+  args: {
+    error: 'Error!',
+    label: 'Input',
+    placeholder: 'Input',
+    width: '284px',
   },
 }
