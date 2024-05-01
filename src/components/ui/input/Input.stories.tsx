@@ -36,3 +36,22 @@ export const Disabled: Story = {
     width: '284px',
   },
 }
+
+export const Password: Story = {
+  args: {
+    label: 'Input',
+    placeholder: 'Input',
+    type: 'password',
+    width: '284px',
+  },
+}
+
+export const DisabledPassword: Story = {
+  args: {
+    disabled: true,
+    label: 'Input',
+    placeholder: 'Input',
+    type: 'password',
+    width: '284px',
+  },
+}

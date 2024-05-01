@@ -1,5 +1,6 @@
 import { ComponentPropsWithoutRef } from 'react'
 
+import Eye from '@/icons/icons input/eye.svg'
 import { clsx } from 'clsx'
 
 import styles from './input.module.scss'
@@ -13,7 +14,15 @@ export type InputProps = {
   search?: boolean
 } & ComponentPropsWithoutRef<'input'>
 
-export const Input = ({ className, disabled, error, label, placeholder, width }: InputProps) => {
+export const Input = ({
+  className,
+  disabled,
+  error,
+  label,
+  placeholder,
+  type,
+  width,
+}: InputProps) => {
   const classNames = {
     input: clsx(styles.inputContainer, !!error && styles.error, className),
     label: clsx(styles.label, disabled && styles.disabled),
@@ -34,8 +43,9 @@ export const Input = ({ className, disabled, error, label, placeholder, width }:
           disabled={disabled}
           placeholder={placeholder}
           style={error ? { color: 'var( --color-danger-300 )' } : {}}
-          type={'text'}
+          type={type}
         />
+        {type === 'password' && <img alt={'Eye'} src={Eye} />}
       </div>
 
       {error && (
