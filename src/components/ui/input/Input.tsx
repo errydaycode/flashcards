@@ -13,16 +13,17 @@ export type InputProps = {
   search?: boolean
 } & ComponentPropsWithoutRef<'input'>
 
-export const Input = ({ className, error, label, placeholder, width }: InputProps) => {
+export const Input = ({ className, disabled, error, label, placeholder, width }: InputProps) => {
   const classNames = {
     input: clsx(styles.inputContainer, !!error && styles.error, className),
+    label: clsx(styles.label, disabled && styles.disabled),
   }
 
   return (
-    <div className={styles.main} style={{ width }}>
+    <div className={clsx(styles.main, disabled && styles.disabled)} style={{ width }}>
       {label && (
         <div>
-          <Typography className={styles.label} variant={'body2'}>
+          <Typography className={classNames.label} variant={'body2'}>
             {label}
           </Typography>
         </div>
@@ -30,6 +31,7 @@ export const Input = ({ className, error, label, placeholder, width }: InputProp
       <div className={classNames.input}>
         <input
           className={styles.input}
+          disabled={disabled}
           placeholder={placeholder}
           style={error ? { color: 'var( --color-danger-300 )' } : {}}
           type={'text'}
