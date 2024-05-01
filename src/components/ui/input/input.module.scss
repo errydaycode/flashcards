@@ -12,7 +12,7 @@
   &:hover {
     background: var(--color-dark-700);
     border: 1px solid var(--color-dark-100);
-    border-radius: 2px;
+    border-radius: 1px;
   }
 
   &:focus-within {
@@ -20,7 +20,7 @@
   }
 
   &:active {
-    border: 1px solid var(--color-info-700);
+    border: 2px solid var(--color-info-700);
   }
 }
 
@@ -40,8 +40,17 @@
   color: var(--color-dark-100);
 }
 
+.input:disabled {
+  color: inherit;
+  opacity: 0.5;
+}
+
 .label {
   color: var(--color-dark-100);
+
+  &.disabled {
+    color: var(--color-dark-300);
+  }
 }
 
 .main {
