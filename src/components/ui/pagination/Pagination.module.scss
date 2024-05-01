@@ -1,0 +1,54 @@
+.wrapper {
+  display: flex;
+  border: 1px solid green;
+}
+
+.listWrapper {
+  display: flex;
+  align-items: center;
+  width: 535px;
+  height: 24px;
+  list-style: none;
+  margin-top: 20px;
+  padding: 0;
+
+  .listItem {
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    color: var(--color-light-100);
+    border-radius: 2px;
+
+    a {
+      text-decoration: none;
+    }
+
+    &:hover {
+      background: var(--color-dark-500);
+    }
+
+    &:focus {
+      outline: 2px solid var(--color-info-900);
+      border-radius: 2px;
+    }
+  }
+
+  .activePage {
+    background: var(--color-light-100);
+    color: var(--color-dark-900);
+  }
+
+  .selectNavigation {
+    display: flex;
+
+    div:last-child {
+      margin-left: 10px;
+      min-width: 110px;
+    }
+    div:first-child {
+      margin-right: 10px;
+    }
+  }
+}

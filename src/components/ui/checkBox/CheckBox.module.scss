@@ -1,0 +1,122 @@
+@mixin hover {
+  &:hover {
+    background: var(--color-dark-500);
+  }
+  &:hover .checkboxRoot {
+    background: var(--color-dark-500);
+  }
+  &:hover .checkboxRoot[data-state='checked'] {
+    background: var(--color-light-100);
+  }
+}
+
+@mixin focus {
+  &:focus  {
+    background: var(--color-dark-100);
+  }
+  &:focus .CheckboxRoot {
+    background: var(--color-dark-100);
+  }
+  &:focus  .CheckboxRoot[data-state='checked'] {
+    background: var(--color-light-100);
+  }
+}
+
+@mixin active {
+  &:active  {
+    background: var(--color-dark-100);
+  }
+  &:active  .CheckboxRoot {
+    background: var(--color-dark-100);
+  }
+  &:active  .CheckboxRoot[data-state='checked'] {
+    background: var(--color-light-100);
+  }
+}
+
+.checkboxWrapper {
+  display: flex;
+  align-items: center;
+  width: 113px;
+  height: 36px;
+  margin-top: 10px;
+}
+
+.checkbox {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  @include hover;
+  @include focus;
+  @include active;
+}
+
+.checkboxRoot {
+  background-color: white;
+  width: 18px;
+  height: 18px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid var(--color-light-900);
+
+  &[data-state='unchecked'] {
+    background: var(--color-dark-900);
+  }
+}
+
+.checkboxIndicator {
+  color: var(--color-dark-900);
+
+  &[data-disabled] {
+    color: var(--color-light-100);
+  }
+}
+
+.label {
+  color: white;
+  margin-left: 2px;
+  font-size: 14px;
+  line-height: 24px;
+}
+
+.disableLabel {
+  color: var(--color-dark-100);
+  margin-left: 2px;
+  font-size: 14px;
+  line-height: 24px;
+}
+
+.disabledWrapper {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.disabled {
+  background-color: white;
+  width: 18px;
+  height: 18px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-dark-900);
+
+  &[data-state='checked'] {
+    background: var(--color-dark-100);
+  }
+  &[data-state='checked'] .checkboxIndicator {
+    color: var(--color-light-100);
+  }
+  &[data-state='unchecked'] {
+    border: 2px solid var(--color-dark-100);
+  }
+}
