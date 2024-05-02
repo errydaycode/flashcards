@@ -9,7 +9,7 @@
   background-color: #000;
 }
 
-.header_title{
+.header_title {
   margin-left: 116px;
 }
 
@@ -22,7 +22,7 @@
   height: 376px;
   padding: 20px;
 
-  border: 1px dashed  #9747ff;
+  border: 1px dashed #9747ff;
   border-radius: 5px;
 }
 
@@ -89,9 +89,7 @@
   height: 36px;
 }
 
-.StarOutline {
-  padding-top: 2px;
-}
+
 
 .select {
   max-width: 214px;
@@ -117,23 +115,23 @@
 
   background-color: #333;
 
-  .nameBlock1{
+  .nameBlock1 {
     display: flex;
     align-items: center;
     width: 214px;
     height: inherit;
 
-    div{
+    div {
       padding-left: 24px;
     }
   }
 
-  .nameBlock2{
+  .nameBlock2 {
     width: 36px;
     padding: 6px 24px;
   }
 
-  .nameBlock3{
+  .nameBlock3 {
     display: flex;
     align-items: center;
 
@@ -142,7 +140,7 @@
     padding: 6px 24px;
   }
 
-  .nameBlock4{
+  .nameBlock4 {
     display: flex;
     align-items: center;
 
@@ -151,7 +149,7 @@
     padding: 6px 24px;
   }
 
-  .nameBlock5{
+  .nameBlock5 {
     display: flex;
     align-items: center;
 
@@ -160,7 +158,7 @@
     padding: 6px 24px;
   }
 
-  .nameBlock6{
+  .nameBlock6 {
     display: flex;
     align-items: center;
 
@@ -171,4 +169,3 @@
 
   /* другие стили */
 }
-

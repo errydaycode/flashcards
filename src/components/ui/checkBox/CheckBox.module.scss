@@ -11,25 +11,25 @@
 }
 
 @mixin focus {
-  &:focus  {
+  &:focus {
     background: var(--color-dark-100);
   }
   &:focus .CheckboxRoot {
     background: var(--color-dark-100);
   }
-  &:focus  .CheckboxRoot[data-state='checked'] {
+  &:focus .CheckboxRoot[data-state='checked'] {
     background: var(--color-light-100);
   }
 }
 
 @mixin active {
-  &:active  {
+  &:active {
     background: var(--color-dark-100);
   }
-  &:active  .CheckboxRoot {
+  &:active .CheckboxRoot {
     background: var(--color-dark-100);
   }
-  &:active  .CheckboxRoot[data-state='checked'] {
+  &:active .CheckboxRoot[data-state='checked'] {
     background: var(--color-light-100);
   }
 }
