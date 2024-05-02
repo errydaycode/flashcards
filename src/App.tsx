@@ -14,7 +14,7 @@ export function App() {
       <div style={{ width: '200px' }}>
         <Input label={'email'} />
       </div>
-      <Pagination />
+      <Pagination pageSize={10} totalCount={5} />
     </div>
   )
 }
