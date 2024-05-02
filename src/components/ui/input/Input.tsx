@@ -45,7 +45,17 @@ export const Input = ({
           style={error ? { color: 'var( --color-danger-300 )' } : {}}
           type={type}
         />
-        {type === 'password' && <img alt={'Eye'} src={Eye} />}
+        {type === 'password' && (
+          <button
+            className={styles.imageButton}
+            disabled={disabled}
+            onClick={() => {
+              alert('btn')
+            }}
+          >
+            <img alt={'Eye'} src={Eye} />
+          </button>
+        )}
       </div>
 
       {error && (
