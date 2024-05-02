@@ -1,0 +1,31 @@
+.root{
+  display: flex;
+  flex-direction: column;
+
+  max-width: 1721px;
+  height: 716px;
+  margin-left: 44px;
+  padding-top: 23px;
+
+
+}
+
+.title{
+  display: flex;
+  align-content: center;
+  align-items: center;
+
+  max-width: 131px;
+  height: 29px;
+
+  h3{
+    font-weight: 600;
+  }
+}
+
+.card{
+  width: 420px;
+  height: 552px;
+  margin-top: 44px;
+  background-color: #171717;
+}
