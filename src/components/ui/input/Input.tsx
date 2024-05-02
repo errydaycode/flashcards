@@ -1,6 +1,6 @@
 import { ComponentPropsWithoutRef } from 'react'
 
-import Eye from '@/icons/icons input/eye.svg'
+import { Icon } from '@/components/ui/icon'
 import { clsx } from 'clsx'
 
 import styles from './input.module.scss'
@@ -12,6 +12,7 @@ export type InputProps = {
   label?: string
   onValueChange?: (value: string) => void
   search?: boolean
+  value?: string
 } & ComponentPropsWithoutRef<'input'>
 
 export const Input = ({
@@ -19,13 +20,19 @@ export const Input = ({
   disabled,
   error,
   label,
+  onValueChange,
   placeholder,
   type,
+  value,
   width,
 }: InputProps) => {
   const classNames = {
     input: clsx(styles.inputContainer, !!error && styles.error, className),
     label: clsx(styles.label, disabled && styles.disabled),
+  }
+
+  const onInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    onValueChange?.(e.currentTarget.value)
   }
 
   return (
@@ -41,9 +48,11 @@ export const Input = ({
         <input
           className={styles.input}
           disabled={disabled}
+          onChange={onInputChange}
           placeholder={placeholder}
           style={error ? { color: 'var( --color-danger-300 )' } : {}}
           type={type}
+          value={value}
         />
         {type === 'password' && (
           <button
@@ -53,7 +62,7 @@ export const Input = ({
               alert('btn')
             }}
           >
-            <img alt={'Eye'} src={Eye} />
+            <Icon height={'20'} iconId={'openedEye'} viewBox={'0 0 20 20'} width={'20'} />
           </button>
         )}
       </div>
