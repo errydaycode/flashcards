@@ -55,3 +55,31 @@ export const DisabledPassword: Story = {
     width: '284px',
   },
 }
+export const PasswordError: Story = {
+  args: {
+    error: 'Error!',
+    label: 'Input',
+    placeholder: 'Input',
+    type: 'password',
+    width: '284px',
+  },
+}
+
+export const Search: Story = {
+  args: {
+    disabled: true,
+    label: 'Input',
+    placeholder: 'Input search',
+    type: 'search',
+    width: '284px',
+  },
+}
+export const SearchError: Story = {
+  args: {
+    error: 'Error!',
+    label: 'Input',
+    placeholder: 'Input search',
+    type: 'search',
+    width: '284px',
+  },
+}
