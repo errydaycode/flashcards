@@ -1,17 +1,18 @@
 import React, { FC, useState } from 'react'
 
 import { Selects } from '@/components/ui/select/Select'
+import { Typography } from '@/components/ui/typography'
 import { paginationRange } from '@/utils'
 import { clsx } from 'clsx'
 
-import style from './Pagination.module.scss'
+import style from './pagination.module.scss'
 
 interface Props {
   pageSize: number
   totalCount: number
 }
 
-export const Pagination: FC<Props> = ({ pageSize = 2, totalCount = 45 }) => {
+export const Pagination: FC<Props> = ({ pageSize, totalCount }) => {
   const [page, setPage] = useState(1)
   const totalPage: number = Math.ceil(totalCount / pageSize)
   const pages = paginationRange(totalPage, page, 1)
@@ -47,7 +48,7 @@ export const Pagination: FC<Props> = ({ pageSize = 2, totalCount = 45 }) => {
       <ul className={style.listWrapper}>
         <li className={style.listItem} onClick={onClickNextPage}>
           <a href={'#'}>
-            <span>&laquo;</span>
+            <span>&lsaquo;</span>
           </a>
         </li>
         {pages.map(item => {
@@ -58,20 +59,22 @@ export const Pagination: FC<Props> = ({ pageSize = 2, totalCount = 45 }) => {
               key={item}
               onClick={onClickPage}
             >
-              <a href={'#'}>{item}</a>
+              <Typography variant={'body2'}>
+                <a href={'#'}>{item}</a>
+              </Typography>
             </li>
           )
         })}
         <li className={style.listItem} onClick={onClickPrevPage}>
           <a href={'#'}>
-            <span>&raquo;</span>
+            <span>&rsaquo;</span>
           </a>
         </li>
 
         <li className={style.selectNavigation}>
-          <div>Показать</div>
+          <Typography variant={'body2'}>Показать</Typography>
           <Selects />
-          <div>на странице</div>
+          <Typography variant={'body2'}>на странице</Typography>
         </li>
       </ul>
     </nav>
