@@ -1,0 +1,22 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--color-dark-700);
+  width: 100%;
+  height: 60px;
+  padding-left: 136px;
+  padding-right: 136px;
+
+  .headerNavigation {
+    width: 100px;
+    height: 36px;
+    text-align: center;
+  }
+
+  .profileLink {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+  }
+}
