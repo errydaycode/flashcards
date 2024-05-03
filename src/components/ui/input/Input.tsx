@@ -1,4 +1,4 @@
-import { ComponentPropsWithoutRef } from 'react'
+import { ComponentPropsWithoutRef, useState } from 'react'
 
 import { Icon } from '@/components/ui/icon'
 import { clsx } from 'clsx'
@@ -29,8 +29,16 @@ export const Input = ({
   const classNames = {
     input: clsx(styles.inputContainer, !!error && styles.error, className),
     label: clsx(styles.label, disabled && styles.disabled),
+    searchIcon: clsx(styles.searchIcon, disabled && styles.disabledIcon),
   }
+  const [showPassword, setShowPassword] = useState(false)
+  const finalType = getFinalType(type, showPassword)
 
+  const isPasswordType = type === 'password'
+
+  const isSearchType = type === 'search'
+
+  const passwordHandler = () => setShowPassword(prev => !prev)
   const onInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     onValueChange?.(e.currentTarget.value)
   }
@@ -45,23 +53,26 @@ export const Input = ({
         </div>
       )}
       <div className={classNames.input}>
+        {isSearchType && (
+          <Icon
+            className={classNames.searchIcon}
+            height={'16'}
+            iconId={'search'}
+            viewBox={'0 0 16 16'}
+            width={'16'}
+          />
+        )}
         <input
           className={styles.input}
           disabled={disabled}
           onChange={onInputChange}
           placeholder={placeholder}
           style={error ? { color: 'var( --color-danger-300 )' } : {}}
-          type={type}
+          type={isPasswordType ? finalType : 'text'}
           value={value}
         />
-        {type === 'password' && (
-          <button
-            className={styles.imageButton}
-            disabled={disabled}
-            onClick={() => {
-              alert('btn')
-            }}
-          >
+        {isPasswordType && (
+          <button className={styles.button} disabled={disabled} onClick={passwordHandler}>
             <Icon height={'20'} iconId={'openedEye'} viewBox={'0 0 20 20'} width={'20'} />
           </button>
         )}
@@ -76,4 +87,12 @@ export const Input = ({
       )}
     </div>
   )
+}
+
+function getFinalType(type: InputProps['type'], showPassword: boolean) {
+  if (type === 'password' && !showPassword) {
+    return 'password'
+  }
+
+  return 'text'
 }
