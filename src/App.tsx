@@ -6,7 +6,7 @@ import { TabSwitcher } from '@/components/ui/tabs/Tabs'
 
 export function App() {
   return (
-    <div>
+    <div style={{ paddingLeft: '20px' }}>
       <TabSwitcher />
       <CheckBox disabled label={'checkbox'} />
       <CheckBox label={'checkbox'} />

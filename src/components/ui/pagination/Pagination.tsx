@@ -4,7 +4,7 @@ import { Selects } from '@/components/ui/select/Select'
 import { paginationRange } from '@/utils'
 import { clsx } from 'clsx'
 
-import style from './Pagination.module.scss'
+import style from 'src/components/ui/pagination/pagination.module.scss'
 
 interface Props {
   pageSize: number

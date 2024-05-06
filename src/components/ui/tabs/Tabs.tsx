@@ -1,6 +1,6 @@
 import * as Tabs from '@radix-ui/react-tabs'
 
-import style from './Tabs.module.scss'
+import style from 'src/components/ui/tabs/tabs.module.scss'
 
 export const TabSwitcher = () => (
   <Tabs.Root>

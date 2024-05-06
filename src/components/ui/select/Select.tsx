@@ -3,7 +3,7 @@ import { FC, useState } from 'react'
 import { ChevronDownIcon, ChevronUpIcon } from '@radix-ui/react-icons'
 import * as Select from '@radix-ui/react-select'
 
-import style from './Select.module.scss'
+import style from 'src/components/ui/select/select.module.scss'
 
 interface Props {
   label?: string

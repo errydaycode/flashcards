@@ -3,7 +3,7 @@ import { FC, useState } from 'react'
 import * as Checkbox from '@radix-ui/react-checkbox'
 import { CheckIcon } from '@radix-ui/react-icons'
 
-import style from './CheckBox.module.scss'
+import style from 'src/components/ui/checkBox/checkBox.module.scss'
 
 interface Props {
   disabled?: boolean
