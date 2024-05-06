@@ -1,9 +1,10 @@
 import { FC, useState } from 'react'
 
+import { Typography } from '@/components/ui/typography'
 import * as Checkbox from '@radix-ui/react-checkbox'
 import { CheckIcon } from '@radix-ui/react-icons'
 
-import style from 'src/components/ui/checkBox/checkBox.module.scss'
+import style from './checkBox.module.scss'
 
 interface Props {
   disabled?: boolean
@@ -22,7 +23,6 @@ export const CheckBox: FC<Props> = ({ disabled, label }) => {
       <div className={disabled ? style.disabledWrapper : style.checkbox} tabIndex={1}>
         <Checkbox.Root
           className={disabled ? style.disabled : style.checkboxRoot}
-          defaultChecked
           disabled={disabled}
           id={'c1'}
           onClick={onCheckedChange}
@@ -33,7 +33,7 @@ export const CheckBox: FC<Props> = ({ disabled, label }) => {
         </Checkbox.Root>
       </div>
       <label className={disabled ? style.disableLabel : style.label} htmlFor={'c1'}>
-        {label}
+        <Typography variant={'body2'}>{label}</Typography>
       </label>
     </div>
   )

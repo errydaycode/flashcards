@@ -1,20 +1,23 @@
 import { CheckBox } from '@/components/ui/checkBox/CheckBox'
+import { Header } from '@/components/ui/header/Header'
 import { Input } from '@/components/ui/input'
+import { NewCardModal } from '@/components/ui/newCardModal/NewCardModal'
 import { Pagination } from '@/components/ui/pagination/Pagination'
-import { Selects } from '@/components/ui/select/Select'
+import { CustomSlider } from '@/components/ui/slider/Slider'
 import { TabSwitcher } from '@/components/ui/tabs/Tabs'
 
 export function App() {
   return (
-    <div style={{ paddingLeft: '20px' }}>
+    <div>
+      <Header />
       <TabSwitcher />
-      <CheckBox disabled label={'checkbox'} />
       <CheckBox label={'checkbox'} />
-      <Selects />
       <div style={{ width: '200px' }}>
         <Input label={'email'} />
       </div>
-      <Pagination pageSize={10} totalCount={5} />
+      <Pagination pageSize={2} totalCount={45} />
+      <CustomSlider />
+      <NewCardModal />
     </div>
   )
 }
