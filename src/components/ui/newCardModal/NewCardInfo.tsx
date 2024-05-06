@@ -12,19 +12,21 @@ interface CardInfoProps {
 }
 
 export const NewCardInfo: FC<CardInfoProps> = ({ title }) => {
-  const [image, setImage] = useState<ArrayBuffer | null | string>(mask)
+  const [image, setImage] = useState<string>(mask) // предполагается, что mask - это строка, представляющая изображение по умолчанию
 
   const handleImageChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const file: any = event.target.files?.[0]
+    const file = event.target.files?.[0]
 
-    const reader = new FileReader()
+    if (file instanceof File) {
+      const reader = new FileReader()
 
-    reader.onload = () => {
-      const imageData: ArrayBuffer | null | string = reader.result
+      reader.onload = () => {
+        const imageData = reader.result as string
 
-      setImage(imageData)
+        setImage(imageData)
+      }
+      reader.readAsDataURL(file)
     }
-    reader.readAsDataURL(file)
   }
 
   return (
@@ -37,7 +39,6 @@ export const NewCardInfo: FC<CardInfoProps> = ({ title }) => {
       <img
         alt={'Uploaded Image'}
         className={styles.cardImage}
-        //@ts-ignore
         src={image}
         style={{ height: '119px', objectFit: 'fill', width: '100%' }}
       />
