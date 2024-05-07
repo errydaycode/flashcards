@@ -1,7 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
 import { Typography } from '@/components/ui/typography'
-import { Card as CardComponent } from 'src/components/ui/card/Card'
+
+import { Card as CardComponent } from './Card'
 
 const meta = {
   component: CardComponent,
