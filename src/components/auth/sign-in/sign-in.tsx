@@ -1,11 +1,15 @@
 import { useForm } from 'react-hook-form'
 
 import { emailSchema, passwordSchema } from '@/common/utils/zod-schemas'
+import { Card } from '@/components/ui/card'
 import { FormCheckbox } from '@/components/ui/form-utils/form-checkbox'
 import { FormInput } from '@/components/ui/form-utils/form-input'
+import { Typography } from '@/components/ui/typography'
 import { DevTool } from '@hookform/devtools'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
+
+import s from './sign-in.module.scss'
 
 import { Button } from '../../ui/button'
 
@@ -35,12 +39,17 @@ export const SignIn = ({ onSubmit }: Props) => {
     <>
       {import.meta.env.DEV && <DevTool control={control} />}
 
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <FormInput control={control} label={'email'} name={'email'} />
-        <FormInput control={control} label={'password'} name={'password'} />
-        <FormCheckbox control={control} label={'Remember me'} name={'rememberMe'} />
-        <Button type={'submit'}>Submit</Button>
-      </form>
+      <Card className={s.card}>
+        <Typography className={s.title} variant={'large'}>
+          Sign In
+        </Typography>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <FormInput control={control} label={'Email'} name={'email'} />
+          <FormInput control={control} label={'Password'} name={'password'} type={'password'} />
+          <FormCheckbox control={control} label={'Remember me'} name={'rememberMe'} />
+          <Button type={'submit'}>Submit</Button>
+        </form>
+      </Card>
     </>
   )
 }
