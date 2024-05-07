@@ -8,13 +8,14 @@ import style from './checkBox.module.scss'
 
 export type CheckBoxProps = {
   checked?: boolean
+  className?: string
   disabled?: boolean
   label?: string
   onCheckedChange?: (checked: boolean) => void
 }
 
 export const CheckBox = forwardRef<ElementRef<typeof Checkbox.Root>, CheckBoxProps>(
-  ({ checked, disabled, label, onCheckedChange }, ref) => {
+  ({ checked, className, disabled, label, onCheckedChange }, ref) => {
     return (
       <div className={style.checkboxWrapper}>
         <div className={disabled ? style.disabledWrapper : style.checkbox} tabIndex={1}>
@@ -31,7 +32,7 @@ export const CheckBox = forwardRef<ElementRef<typeof Checkbox.Root>, CheckBoxPro
             </Checkbox.Indicator>
           </Checkbox.Root>
         </div>
-        <label className={disabled ? style.disableLabel : style.label} htmlFor={'c1'}>
+        <label className={disabled ? style.disableLabel : style.label && className} htmlFor={'c1'}>
           <Typography variant={'body2'}>{label}</Typography>
         </label>
       </div>

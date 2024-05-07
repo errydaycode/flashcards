@@ -44,9 +44,16 @@ export const SignIn = ({ onSubmit }: Props) => {
           Sign In
         </Typography>
         <form onSubmit={handleSubmit(onSubmit)}>
-          <FormInput control={control} label={'Email'} name={'email'} />
-          <FormInput control={control} label={'Password'} name={'password'} type={'password'} />
-          <FormCheckbox control={control} label={'Remember me'} name={'rememberMe'} />
+          <div className={s.form}>
+            <FormInput control={control} label={'Email'} name={'email'} />
+            <FormInput control={control} label={'Password'} name={'password'} type={'password'} />
+          </div>
+          <FormCheckbox
+            className={s.checkbox}
+            control={control}
+            label={'Remember me'}
+            name={'rememberMe'}
+          />
           <Button type={'submit'}>Submit</Button>
         </form>
       </Card>
