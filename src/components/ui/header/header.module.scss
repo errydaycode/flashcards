@@ -18,5 +18,11 @@
     display: flex;
     gap: 5px;
     align-items: center;
+
+    img {
+      width: 36px;
+      height: 36px;
+      margin-bottom: 6px;
+    }
   }
 }

@@ -3,6 +3,7 @@ import { Header } from '@/components/ui/header/Header'
 import { Input } from '@/components/ui/input'
 import { NewCardModal } from '@/components/ui/newCardModal/NewCardModal'
 import { Pagination } from '@/components/ui/pagination/Pagination'
+import { PersonalInformation } from '@/components/ui/personalInformation/PersonalInformation'
 import { CustomSlider } from '@/components/ui/slider/Slider'
 import { TabSwitcher } from '@/components/ui/tabs/Tabs'
 
@@ -18,6 +19,7 @@ export function App() {
       <Pagination pageSize={2} totalCount={45} />
       <CustomSlider />
       <NewCardModal />
+      <PersonalInformation onSubmit={() => {}} />
     </div>
   )
 }

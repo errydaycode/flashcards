@@ -1,4 +1,4 @@
-import { ChangeEvent, FC, useState } from 'react'
+import { FC } from 'react'
 
 import mask from '@/assets/image/Mask.png'
 import { Icon } from '@/components/ui/icon'
@@ -6,28 +6,14 @@ import { Input } from '@/components/ui/input'
 import { Typography } from '@/components/ui/typography'
 
 import styles from '@/components/ui/newCardModal/newCardModal.module.scss'
+import { useImageUpload } from '@/hooks/useImageUpload'
 
 interface CardInfoProps {
   title: string
 }
 
 export const NewCardInfo: FC<CardInfoProps> = ({ title }) => {
-  const [image, setImage] = useState<string>(mask) // предполагается, что mask - это строка, представляющая изображение по умолчанию
-
-  const handleImageChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0]
-
-    if (file instanceof File) {
-      const reader = new FileReader()
-
-      reader.onload = () => {
-        const imageData = reader.result as string
-
-        setImage(imageData)
-      }
-      reader.readAsDataURL(file)
-    }
-  }
+  const { image, handleImageChange } = useImageUpload(mask)
 
   return (
     <div className={styles.cardInfoWrapper}>

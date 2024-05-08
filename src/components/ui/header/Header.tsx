@@ -1,4 +1,4 @@
-import avatar from '@/assets/image/Avatar.png'
+import avatar from '@/assets/image/avatar.svg'
 import logo from '@/assets/image/Logo.png'
 import { Button } from '@/components/ui/button'
 import { Typography } from '@/components/ui/typography'
