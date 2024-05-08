@@ -48,14 +48,26 @@ export const SignIn = ({ onSubmit }: Props) => {
             <FormInput control={control} label={'Email'} name={'email'} />
             <FormInput control={control} label={'Password'} name={'password'} type={'password'} />
           </div>
-          <FormCheckbox
-            className={s.checkbox}
-            control={control}
-            label={'Remember me'}
-            name={'rememberMe'}
-          />
-          <Button type={'submit'}>Submit</Button>
+          <FormCheckbox control={control} label={'Remember me'} name={'rememberMe'} />
+          <Typography
+            as={'a'}
+            className={s.recoverPassword}
+            href={'https://www.google.ru/?hl=ru'}
+            target={'_blank'}
+            variant={'body2'}
+          >
+            Forgot Password?
+          </Typography>
+          <Button fullWidth type={'submit'}>
+            Submit
+          </Button>
         </form>
+        <Typography className={s.questionText} variant={'body2'}>
+          {`Don't have an account?`}
+        </Typography>
+        <Typography as={'a'} className={s.signUpLink} variant={'link1'}>
+          Sign Up
+        </Typography>
       </Card>
     </>
   )
