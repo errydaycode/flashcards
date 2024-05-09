@@ -33,14 +33,14 @@ type Option = {
   value: string
 }
 export type RadioGroupProps = {
-  errorMessage?: string
   options: Option[]
-} & Omit<React.ComponentPropsWithoutRef<typeof RadioGroupPrimitive.Root>, 'children'>
+} & Omit<React.ComponentPropsWithoutRef<typeof RadioGroupPrimitive.Root>, 'children'> // исключаем чилдренов для контроля
+
 const RadioGroup = React.forwardRef<
   React.ElementRef<typeof RadioGroupPrimitive.Root>,
   RadioGroupProps
 >((props, ref) => {
-  const { errorMessage, options, ...restProps } = props
+  const { options, ...restProps } = props
 
   return (
     <RadioGroupRoot {...restProps} ref={ref}>

@@ -4,16 +4,16 @@ import mask from '@/assets/image/Mask.png'
 import { Icon } from '@/components/ui/icon'
 import { Input } from '@/components/ui/input'
 import { Typography } from '@/components/ui/typography'
+import { useImageUpload } from '@/hooks/useImageUpload'
 
 import styles from '@/components/ui/newCardModal/newCardModal.module.scss'
-import { useImageUpload } from '@/hooks/useImageUpload'
 
 interface CardInfoProps {
   title: string
 }
 
 export const NewCardInfo: FC<CardInfoProps> = ({ title }) => {
-  const { image, handleImageChange } = useImageUpload(mask)
+  const { handleImageChange, image } = useImageUpload(mask)
 
   return (
     <div className={styles.cardInfoWrapper}>
