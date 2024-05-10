@@ -11,4 +11,13 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const Header: Story = {}
+export const HeaderSingIn: Story = {
+  args: {
+    isLogin: false,
+  },
+}
+export const HeaderAvatar: Story = {
+  args: {
+    isLogin: true,
+  },
+}

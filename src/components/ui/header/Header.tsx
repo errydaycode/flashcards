@@ -5,9 +5,11 @@ import { Typography } from '@/components/ui/typography'
 
 import styles from './header.module.scss'
 
-const isLogin: boolean = true
+type IsLogin = {
+  isLogin: boolean
+}
 
-export const Header = () => {
+export const Header = ({ isLogin }: IsLogin) => {
   return (
     <header className={styles.header}>
       <img alt={'logo'} src={logo} />
