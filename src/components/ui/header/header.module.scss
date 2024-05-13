@@ -19,6 +19,10 @@
     gap: 5px;
     align-items: center;
 
+    .profileName {
+      border-bottom: 1px dashed var(--color-light-100);
+    }
+
     img {
       width: 36px;
       height: 36px;

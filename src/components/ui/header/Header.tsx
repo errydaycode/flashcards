@@ -1,5 +1,5 @@
-import avatar from '@/assets/image/avatar.svg'
 import logo from '@/assets/image/Logo.png'
+import avatar from '@/assets/image/avatar.svg'
 import { Button } from '@/components/ui/button'
 import { Typography } from '@/components/ui/typography'
 
@@ -19,7 +19,9 @@ export const Header = ({ isLogin }: IsLogin) => {
         </Button>
       ) : (
         <div className={styles.profileLink}>
-          <Typography variant={'subtitle1'}>Ivan</Typography>
+          <Typography className={styles.profileName} variant={'subtitle1'}>
+            Ivan
+          </Typography>
           <img alt={'avatar'} src={avatar} />
         </div>
       )}
