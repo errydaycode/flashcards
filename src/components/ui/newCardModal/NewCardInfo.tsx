@@ -1,9 +1,10 @@
-import { ChangeEvent, FC, useState } from 'react'
+import { FC } from 'react'
 
 import mask from '@/assets/image/Mask.png'
 import { Icon } from '@/components/ui/icon'
 import { Input } from '@/components/ui/input'
 import { Typography } from '@/components/ui/typography'
+import { useImageUpload } from '@/hooks/useImageUpload'
 
 import styles from '@/components/ui/newCardModal/newCardModal.module.scss'
 
@@ -12,20 +13,7 @@ interface CardInfoProps {
 }
 
 export const NewCardInfo: FC<CardInfoProps> = ({ title }) => {
-  const [image, setImage] = useState<ArrayBuffer | null | string>(mask)
-
-  const handleImageChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const file: any = event.target.files?.[0]
-
-    const reader = new FileReader()
-
-    reader.onload = () => {
-      const imageData: ArrayBuffer | null | string = reader.result
-
-      setImage(imageData)
-    }
-    reader.readAsDataURL(file)
-  }
+  const { handleImageChange, image } = useImageUpload(mask)
 
   return (
     <div className={styles.cardInfoWrapper}>
@@ -37,7 +25,7 @@ export const NewCardInfo: FC<CardInfoProps> = ({ title }) => {
       <img
         alt={'Uploaded Image'}
         className={styles.cardImage}
-        src={typeof image === 'string' ? image : ''}
+        src={image}
         style={{ height: '119px', objectFit: 'fill', width: '100%' }}
       />
       <label className={styles.changeImageInput} htmlFor={'inputFile' + title}>

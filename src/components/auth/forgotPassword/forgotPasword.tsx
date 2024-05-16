@@ -35,8 +35,8 @@ export const ForgotPassword = ({}: Props) => {
         </Typography>
         <form className={s.form} onSubmit={handleSubmit(onSubmit)}>
           <FormInput control={control} label={'Email'} name={'email'} />
-          <Typography as={'p'} className={s.form__description} variant={'body2'}>
-            Enter your email address and we will send you further instructions{' '}
+          <Typography as={'p'} className={s.form__description} variant={'subtitle1'}>
+            Enter your email address and we will send you further instructions
           </Typography>
           <Button fullWidth type={'submit'}>
             Send Instruction
