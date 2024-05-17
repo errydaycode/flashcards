@@ -1,4 +1,4 @@
-import { useState, ChangeEvent } from 'react'
+import { ChangeEvent, useState } from 'react'
 
 export function useImageUpload(defaultImage: string) {
   const [image, setImage] = useState<string>(defaultImage)
@@ -11,11 +11,12 @@ export function useImageUpload(defaultImage: string) {
 
       reader.onload = () => {
         const imageData = reader.result as string
+
         setImage(imageData)
       }
       reader.readAsDataURL(file)
     }
   }
 
-  return { image, handleImageChange }
+  return { handleImageChange, image }
 }
