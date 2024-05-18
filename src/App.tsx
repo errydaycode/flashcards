@@ -1,11 +1,9 @@
-import { Header } from '@/components/ui/header/Header'
-import { MainPage } from '@/pages/mainPage/MainPage'
+import { Router } from '@/routes'
 
 export function App() {
   return (
     <div>
-      <Header isLogin />
-      <MainPage />
+      <Router />
     </div>
   )
 }
