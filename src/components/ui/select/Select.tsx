@@ -7,11 +7,11 @@ import * as Select from '@radix-ui/react-select'
 import style from './select.module.scss'
 
 interface Props {
-  label?: string
+  label: string
 }
 
 export const Selects: FC<Props> = ({ label }) => {
-  const [value, setValue] = useState('100')
+  const [value, setValue] = useState('10')
   const [open, setOpen] = useState(false)
 
   return (
@@ -22,7 +22,13 @@ export const Selects: FC<Props> = ({ label }) => {
             <Typography variant={'body2'}>{label}</Typography>
           </div>
         )}
-        <Select.Trigger className={style.SelectTrigger}>
+        <Select.Trigger
+          className={style.SelectTrigger}
+          onChange={e => {
+            setValue(e.currentTarget.value)
+          }}
+          value={value}
+        >
           <Select.Value aria-label={value}>{value}</Select.Value>
           <Select.Icon>{open ? <ChevronUpIcon /> : <ChevronDownIcon />}</Select.Icon>
         </Select.Trigger>
