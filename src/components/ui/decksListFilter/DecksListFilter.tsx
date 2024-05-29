@@ -1,5 +1,3 @@
-import { FC } from 'react'
-
 import { Button } from '@/components/ui/button'
 import { Icon } from '@/components/ui/icon'
 import { Input } from '@/components/ui/input'
@@ -9,7 +7,12 @@ import { Typography } from '@/components/ui/typography'
 
 import styles from './decksListFilter.module.scss'
 
-export const DecksListFilter: FC = () => {
+type Props = {
+  changeValue?: (value: string) => void
+  search: string
+}
+
+export const DecksListFilter = ({ changeValue, search }: Props) => {
   return (
     <div className={styles.wrapper}>
       <div className={styles.header}>
@@ -19,7 +22,13 @@ export const DecksListFilter: FC = () => {
         </Button>
       </div>
       <div className={styles.filter}>
-        <Input placeholder={'Input search'} type={'search'} width={'299px'} />
+        <Input
+          onValueChange={changeValue}
+          placeholder={'Input search'}
+          type={'search'}
+          value={search}
+          width={'299px'}
+        />
         <div>
           <Typography variant={'body2'}>Show decks cards</Typography>
           <TabSwitcher />

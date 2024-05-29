@@ -8,12 +8,11 @@ import { clsx } from 'clsx'
 import style from './pagination.module.scss'
 
 interface Props {
-  itemsPerPage?: string
   pageSize: number
   totalCount: number
 }
 
-export const Pagination: FC<Props> = ({ itemsPerPage = '', pageSize, totalCount }) => {
+export const Pagination: FC<Props> = ({ pageSize, totalCount }) => {
   const [page, setPage] = useState(1)
   const totalPage: number = Math.ceil(totalCount / pageSize)
   const pages = paginationRange(totalPage, page, 1)
@@ -74,7 +73,7 @@ export const Pagination: FC<Props> = ({ itemsPerPage = '', pageSize, totalCount 
 
         <li className={style.selectNavigation}>
           <Typography variant={'body2'}>Показать</Typography>
-          <Selects itemsPerPage={itemsPerPage} />
+          <Selects />
           <Typography variant={'body2'}>на странице</Typography>
         </li>
       </ul>

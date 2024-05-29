@@ -1,3 +1,4 @@
+import { Button } from '@/components/ui/button'
 import { Icon } from '@/components/ui/icon'
 import {
   TableBody,
@@ -14,6 +15,10 @@ type Props = {
 }
 
 export const DecksTable = ({ data }: Props) => {
+  const deleteDeckHandler = (id: string) => {
+    onDeleteDeckClick(id)
+  }
+
   return (
     <>
       <Tables>
@@ -37,15 +42,15 @@ export const DecksTable = ({ data }: Props) => {
                 <TableCell>{deck.author.name}</TableCell>
                 <TableCell></TableCell>
                 <TableCell>
-                  <button>
+                  <Button>
                     <Icon iconId={'pencil'} />
-                  </button>
-                  <button>
+                  </Button>
+                  <Button>
                     <Icon iconId={'player'} />
-                  </button>
-                  <button>
+                  </Button>
+                  <Button onClick={() => deleteDeckHandler(deck.id)}>
                     <Icon iconId={'trashDelete'} />
-                  </button>
+                  </Button>
                 </TableCell>
               </TableRows>
             )

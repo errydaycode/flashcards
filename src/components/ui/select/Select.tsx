@@ -6,29 +6,33 @@ import * as Select from '@radix-ui/react-select'
 
 import style from './select.module.scss'
 
-interface Props {
-  label: string
+export interface Props {
+  label?: string
+  onChangeValue?: (value: string) => void
+  value?: string
 }
 
-export const Selects: FC<Props> = ({ label }) => {
-  const [value, setValue] = useState('10')
-  const [open, setOpen] = useState(false)
+export const Selects: FC<Props> = ({ label, onChangeValue, value }) => {
+  // const [value, setValue] = useState('10')
+  const [open, setOpen] = useState(true)
+  const handleValueChange = (value: string) => {
+    if (onChangeValue) {
+      onChangeValue(value)
+    }
+  }
+  const handleOpenChange = (open: boolean) => {
+    setOpen(open)
+  }
 
   return (
     <div className={style.selectWrapper}>
-      <Select.Root onOpenChange={setOpen} onValueChange={setValue} value={value}>
-        {label && (
+      <Select.Root onOpenChange={handleOpenChange} onValueChange={handleValueChange} value={value}>
+        {open && (
           <div className={style.selectName}>
             <Typography variant={'body2'}>{label}</Typography>
           </div>
         )}
-        <Select.Trigger
-          className={style.SelectTrigger}
-          onChange={e => {
-            setValue(e.currentTarget.value)
-          }}
-          value={value}
-        >
+        <Select.Trigger className={style.SelectTrigger}>
           <Select.Value aria-label={value}>{value}</Select.Value>
           <Select.Icon>{open ? <ChevronUpIcon /> : <ChevronDownIcon />}</Select.Icon>
         </Select.Trigger>

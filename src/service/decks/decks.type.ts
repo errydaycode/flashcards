@@ -42,3 +42,10 @@ export interface CreateDeckArgs {
   isPrivate: boolean
   name: string
 }
+export type UpdateDeckArgs = {
+  id: string
+} & Partial<Omit<CreateDeckArgs, 'id'>>
+
+export interface DeleteDeck {
+  id: string
+}
