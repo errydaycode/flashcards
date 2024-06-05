@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react'
+import React, { ChangeEvent, FC, useState } from 'react'
 
 import { Selects } from '@/components/ui/select/Select'
 import { Typography } from '@/components/ui/typography'
@@ -8,11 +8,13 @@ import { clsx } from 'clsx'
 import style from './pagination.module.scss'
 
 interface Props {
+  changeValue?: (e: ChangeEvent<HTMLSelectElement>) => void
   pageSize: number
   totalCount: number
+  value?: number
 }
 
-export const Pagination: FC<Props> = ({ pageSize, totalCount }) => {
+export const Pagination: FC<Props> = ({ changeValue, pageSize, totalCount, value }) => {
   const [page, setPage] = useState(1)
   const totalPage: number = Math.ceil(totalCount / pageSize)
   const pages = paginationRange(totalPage, page, 1)
@@ -73,7 +75,7 @@ export const Pagination: FC<Props> = ({ pageSize, totalCount }) => {
 
         <li className={style.selectNavigation}>
           <Typography variant={'body2'}>Показать</Typography>
-          <Selects />
+          <Selects onChangeValue={changeValue} value={value} />
           <Typography variant={'body2'}>на странице</Typography>
         </li>
       </ul>

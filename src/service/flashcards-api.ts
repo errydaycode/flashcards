@@ -1,3 +1,4 @@
+import { baseApi } from '@/service'
 import {
   CreateDeckArgs,
   Deck,
@@ -6,16 +7,8 @@ import {
   GetDecksArgs,
   UpdateDeckArgs,
 } from '@/service/decks/decks.type'
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
-export const flashcardsApi = createApi({
-  baseQuery: fetchBaseQuery({
-    baseUrl: 'https://api.flashcards.andrii.es',
-    credentials: 'include',
-    prepareHeaders: headers => {
-      headers.append('x-auth-skip', 'true')
-    },
-  }),
+export const flashcardsApi = baseApi.injectEndpoints({
   endpoints: builder => {
     return {
       createDeck: builder.mutation<Deck, CreateDeckArgs>({
@@ -34,7 +27,7 @@ export const flashcardsApi = createApi({
         query: args => ({
           method: 'GET',
           params: args ?? undefined,
-          url: 'v2/decks',
+          url: '/v2/decks',
         }),
       }),
       updateDecks: builder.mutation<Deck, UpdateDeckArgs>({
@@ -47,8 +40,6 @@ export const flashcardsApi = createApi({
       }),
     }
   },
-  reducerPath: 'flashcardsApi',
-  tagTypes: ['Decks'],
 })
 
 export const {

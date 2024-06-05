@@ -1,10 +1,10 @@
 import { FC } from 'react'
 
 import mask from '@/assets/image/Mask.png'
+import { useImageUpload } from '@/components/ui/fileUploder/FileUploader'
 import { Icon } from '@/components/ui/icon'
 import { Input } from '@/components/ui/input'
 import { Typography } from '@/components/ui/typography'
-import { useImageUpload } from '@/hooks/useImageUpload'
 
 import styles from '@/components/ui/newCardModal/newCardModal.module.scss'
 

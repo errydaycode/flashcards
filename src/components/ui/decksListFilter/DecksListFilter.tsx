@@ -1,3 +1,6 @@
+import { useState } from 'react'
+
+import { CreateDeck } from '@/components/modals/createDeck/CreateDeck'
 import { Button } from '@/components/ui/button'
 import { Icon } from '@/components/ui/icon'
 import { Input } from '@/components/ui/input'
@@ -8,18 +11,22 @@ import { Typography } from '@/components/ui/typography'
 import styles from './decksListFilter.module.scss'
 
 type Props = {
-  changeValue?: (value: string) => void
-  search: string
+  changeValue?: (e: string) => void
+  search?: string
 }
 
 export const DecksListFilter = ({ changeValue, search }: Props) => {
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  const handleOpenModal = () => {
+    setIsModalOpen(!isModalOpen)
+  }
+
   return (
     <div className={styles.wrapper}>
       <div className={styles.header}>
         <Typography variant={'h1'}>Decks list</Typography>
-        <Button>
-          <Typography variant={'subtitle2'}>Add New Deck</Typography>
-        </Button>
+        <Button onClick={handleOpenModal}>Add New Deck</Button>
+        {isModalOpen && <CreateDeck onClose={handleOpenModal} />}
       </div>
       <div className={styles.filter}>
         <Input
@@ -39,7 +46,7 @@ export const DecksListFilter = ({ changeValue, search }: Props) => {
         </div>
         <Button style={{ height: '36px', padding: '0', width: '150px' }} variant={'secondary'}>
           <Icon iconId={'trashDelete'} />
-          <Typography variant={'subtitle2'}>Clear Filter</Typography>
+          Clear Filter
         </Button>
       </div>
     </div>

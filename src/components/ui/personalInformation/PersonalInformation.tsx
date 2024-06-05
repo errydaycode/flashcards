@@ -2,10 +2,10 @@ import { FC, useState } from 'react'
 
 import avatar from '@/assets/image/avatar.svg'
 import { Button } from '@/components/ui/button'
+import { FileUploader } from '@/components/ui/fileUploder'
 import { Icon } from '@/components/ui/icon'
 import { Input } from '@/components/ui/input'
 import { Typography } from '@/components/ui/typography'
-import { useImageUpload } from '@/hooks/useImageUpload'
 
 import styles from './personalInformation.module.scss'
 
@@ -14,9 +14,9 @@ export interface Props {
 }
 
 export const PersonalInformation: FC<Props> = ({ onSubmit }) => {
-  const { handleImageChange, image } = useImageUpload(avatar)
   const [isShowInput, setIsShowInput] = useState<boolean>(false)
   const [nickname, setNickname] = useState('Ivan')
+  const [file, setFile] = useState<File | null>(null)
 
   const handleIsShowInputClick = () => {
     setIsShowInput(!isShowInput)
@@ -28,22 +28,26 @@ export const PersonalInformation: FC<Props> = ({ onSubmit }) => {
         Personal Information
       </Typography>
 
-      <img alt={'avatar'} className={styles.avatar} src={image} />
+      <img
+        alt={'avatar'}
+        className={styles.avatar}
+        src={file ? URL.createObjectURL(file) : avatar}
+      />
 
-      <label className={styles.customFileInput} htmlFor={'avatarInput'}>
-        <Icon
-          fill={'none'}
-          height={'16'}
-          iconId={'editOutline'}
-          viewBox={'0 0 16 16'}
-          width={'16'}
-        />
-      </label>
-      <input
-        className={styles.avatarInput}
+      <FileUploader
+        className={styles.customFileInput}
         id={'avatarInput'}
-        onChange={handleImageChange}
-        type={'file'}
+        name={'avatarInput'}
+        setFile={setFile}
+        trigger={
+          <Icon
+            fill={'none'}
+            height={'16'}
+            iconId={'editOutline'}
+            viewBox={'0 0 16 16'}
+            width={'16'}
+          />
+        }
       />
 
       <div className={styles.inputWrapper}>

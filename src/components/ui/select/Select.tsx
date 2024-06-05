@@ -1,4 +1,4 @@
-import { FC, useState } from 'react'
+import React, { FC, useState } from 'react'
 
 import { Typography } from '@/components/ui/typography'
 import { ChevronDownIcon, ChevronUpIcon } from '@radix-ui/react-icons'
@@ -8,16 +8,23 @@ import style from './select.module.scss'
 
 export interface Props {
   label?: string
-  onChangeValue?: (value: string) => void
-  value?: string
+  onChangeValue?: (e: React.ChangeEvent<HTMLSelectElement>) => void
+  value?: number
 }
 
 export const Selects: FC<Props> = ({ label, onChangeValue, value }) => {
   // const [value, setValue] = useState('10')
   const [open, setOpen] = useState(true)
+
   const handleValueChange = (value: string) => {
     if (onChangeValue) {
-      onChangeValue(value)
+      const event = {
+        currentTarget: {
+          value,
+        },
+      } as React.ChangeEvent<HTMLSelectElement>
+
+      onChangeValue(event)
     }
   }
   const handleOpenChange = (open: boolean) => {
@@ -26,14 +33,18 @@ export const Selects: FC<Props> = ({ label, onChangeValue, value }) => {
 
   return (
     <div className={style.selectWrapper}>
-      <Select.Root onOpenChange={handleOpenChange} onValueChange={handleValueChange} value={value}>
+      <Select.Root
+        onOpenChange={handleOpenChange}
+        onValueChange={handleValueChange}
+        value={String(value)}
+      >
         {open && (
           <div className={style.selectName}>
             <Typography variant={'body2'}>{label}</Typography>
           </div>
         )}
         <Select.Trigger className={style.SelectTrigger}>
-          <Select.Value aria-label={value}>{value}</Select.Value>
+          <Select.Value aria-label={String(value)}>{value}</Select.Value>
           <Select.Icon>{open ? <ChevronUpIcon /> : <ChevronDownIcon />}</Select.Icon>
         </Select.Trigger>
         <Select.Portal>
@@ -46,8 +57,8 @@ export const Selects: FC<Props> = ({ label, onChangeValue, value }) => {
                 <Select.Item className={style.SelectItem} value={'10'}>
                   <Typography variant={'body1'}>10</Typography>
                 </Select.Item>
-                <Select.Item className={style.SelectItem} value={'100'}>
-                  <Typography variant={'body1'}>100</Typography>
+                <Select.Item className={style.SelectItem} value={'20'}>
+                  <Typography variant={'body1'}>20</Typography>
                 </Select.Item>
               </Select.Group>
             </Select.Viewport>

@@ -15,10 +15,6 @@ type Props = {
 }
 
 export const DecksTable = ({ data }: Props) => {
-  const deleteDeckHandler = (id: string) => {
-    onDeleteDeckClick(id)
-  }
-
   return (
     <>
       <Tables>
@@ -42,13 +38,13 @@ export const DecksTable = ({ data }: Props) => {
                 <TableCell>{deck.author.name}</TableCell>
                 <TableCell></TableCell>
                 <TableCell>
-                  <Button>
+                  <Button variant={'link'}>
                     <Icon iconId={'pencil'} />
                   </Button>
-                  <Button>
+                  <Button variant={'link'}>
                     <Icon iconId={'player'} />
                   </Button>
-                  <Button onClick={() => deleteDeckHandler(deck.id)}>
+                  <Button variant={'link'}>
                     <Icon iconId={'trashDelete'} />
                   </Button>
                 </TableCell>
