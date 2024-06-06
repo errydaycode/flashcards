@@ -47,7 +47,7 @@ export const DecksTable = ({ data }: Props) => {
                   <Button variant={'link'}>
                     <Icon iconId={'player'} />
                   </Button>
-                  <Button onClick={() => deleteDeck} variant={'link'}>
+                  <Button onClick={() => deleteDeck({ id: deck.id })} variant={'link'}>
                     <Icon iconId={'trashDelete'} />
                   </Button>
                 </TableCell>

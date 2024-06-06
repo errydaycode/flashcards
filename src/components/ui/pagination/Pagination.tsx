@@ -1,84 +1,111 @@
-import React, { ChangeEvent, FC, useState } from 'react'
+import { ChangeEvent } from 'react'
 
-import { Selects } from '@/components/ui/select/Select'
+import { DOTS, usePagination } from '@/components/ui/pagination/hooks/usePagination'
+import { PropsSelect, Selects } from '@/components/ui/select/Select'
 import { Typography } from '@/components/ui/typography'
-import { paginationRange } from '@/utils'
 import { clsx } from 'clsx'
 
-import style from './pagination.module.scss'
+import s from './pagination.module.scss'
 
-interface Props {
+import { Icon } from './../icon'
+
+type PaginationProps = {
   changeValue?: (e: ChangeEvent<HTMLSelectElement>) => void
+  className?: string
+  currentPage: number
+  onChangePage: (page: number) => void
   pageSize: number
+  siblingCount?: number
   totalCount: number
   value?: number
-}
+} & PropsSelect
 
-export const Pagination: FC<Props> = ({ changeValue, pageSize, totalCount, value }) => {
-  const [page, setPage] = useState(1)
-  const totalPage: number = Math.ceil(totalCount / pageSize)
-  const pages = paginationRange(totalPage, page, 1)
+export const Pagination = ({
+  changeValue,
+  className,
+  currentPage,
+  onChangePage,
+  pageSize,
+  siblingCount = 1,
+  totalCount,
+  value,
+  ...restProps
+}: PaginationProps) => {
+  const paginationRange = usePagination({
+    currentPage,
+    pageSize,
+    siblingCount,
+    totalCount,
+  })
 
-  const onClickPage = (e: React.SyntheticEvent<HTMLElement>) => {
-    const datasetValue = e.currentTarget.dataset.page
+  // If there are less than 2 times in pagination range we shall not render the component
+  if (currentPage === 0 || paginationRange.length < 2) {
+    return null
+  }
 
-    if (datasetValue === ' ...') {
-      return setPage(totalPage)
-    } else if (datasetValue === '... ') {
-      return setPage(1)
-    }
-
-    if (datasetValue) {
-      setPage(+datasetValue)
+  const onNextHandler = () => {
+    if (currentPage) {
+      onChangePage(currentPage + 1)
     }
   }
 
-  const onClickNextPage = () => {
-    setPage(prevState => {
-      return prevState === 1 ? 1 : prevState - 1
-    })
+  const onPreviousHandler = () => {
+    if (currentPage) {
+      onChangePage(currentPage - 1)
+    }
   }
 
-  const onClickPrevPage = () => {
-    setPage(prevState => {
-      return prevState === totalPage ? totalPage : prevState + 1
-    })
+  const changePageHandler = (pageNumber: number) => () => onChangePage(pageNumber)
+
+  const isFirstPage = currentPage === 1
+  const isLastPage = currentPage === paginationRange[paginationRange.length - 1]
+
+  const classNames = {
+    buttonLeft: clsx(s.item, { [s.disabled]: isFirstPage }),
+    buttonRight: clsx(s.item, { [s.disabled]: isLastPage }),
+    container: clsx(s.container, className),
+    dots: clsx(s.item, s.dots),
   }
 
   return (
-    <nav>
-      <ul className={style.listWrapper}>
-        <li className={style.listItem} onClick={onClickNextPage}>
-          <a href={'#'}>
-            <span>&lsaquo;</span>
-          </a>
-        </li>
-        {pages.map(item => {
+    <div className={classNames.container}>
+      <button className={classNames.buttonLeft} disabled={isFirstPage} onClick={onPreviousHandler}>
+        <Icon iconId={'ArrowDown'} />
+      </button>
+      {paginationRange.map((pageNumber, i) => {
+        // If the pageItem is a DOT, render the DOTS unicode character
+        if (pageNumber === DOTS) {
           return (
-            <li
-              className={clsx(style.listItem, item == page && style.activePage)}
-              data-page={item}
-              key={item}
-              onClick={onClickPage}
-            >
-              <Typography variant={'body2'}>
-                <a href={'#'}>{item}</a>
-              </Typography>
-            </li>
+            <span className={classNames.dots} key={i}>
+              &#8230;
+            </span>
           )
-        })}
-        <li className={style.listItem} onClick={onClickPrevPage}>
-          <a href={'#'}>
-            <span>&rsaquo;</span>
-          </a>
-        </li>
+        }
 
-        <li className={style.selectNavigation}>
-          <Typography variant={'body2'}>Показать</Typography>
-          <Selects onChangeValue={changeValue} value={value} />
-          <Typography variant={'body2'}>на странице</Typography>
-        </li>
-      </ul>
-    </nav>
+        // Render our Page Pills
+        return (
+          <button
+            className={clsx(s.item, pageNumber === currentPage && s.selected)}
+            key={i}
+            onClick={changePageHandler(pageNumber)}
+          >
+            <Typography
+              as={'span'}
+              className={clsx(s.item, pageNumber === currentPage && s.selected)}
+              variant={'body2'}
+            >
+              {pageNumber}
+            </Typography>
+          </button>
+        )
+      })}
+      <button className={classNames.buttonRight} disabled={isLastPage} onClick={onNextHandler}>
+        <Icon iconId={'ArrowDown'} />
+      </button>
+      <Typography as={'div'} className={s.selectContainer} variant={'body2'}>
+        Показать
+        <Selects onChangeValue={changeValue} value={value} {...restProps} /> на странице
+      </Typography>
+    </div>
   )
 }

@@ -15,16 +15,16 @@ type Props = {
   search?: string
 }
 
+const options = [
+  { title: 'My Cards', value: 'a' },
+  { title: 'All Cards', value: 'c' },
+]
+
 export const DecksListFilter = ({ changeValue, search }: Props) => {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const handleOpenModal = () => {
     setIsModalOpen(!isModalOpen)
   }
-
-  const options = [
-    { title: 'My Cards', value: 'a' },
-    { title: 'All Cards', value: 'c' },
-  ]
 
   return (
     <div className={styles.wrapper}>

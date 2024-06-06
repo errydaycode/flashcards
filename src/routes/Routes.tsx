@@ -56,6 +56,10 @@ const privateRoutes: RouteObject[] = [
     element: <PersonalInformation onSubmit={() => {}} />,
     path: ROUTES.personalInformation,
   },
+  {
+    element: <PersonalInformation onSubmit={() => {}} />,
+    path: '',
+  },
 ]
 
 function PrivateRoutes() {

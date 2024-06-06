@@ -6,13 +6,13 @@ import * as Select from '@radix-ui/react-select'
 
 import style from './select.module.scss'
 
-export interface Props {
+export type PropsSelect = {
   label?: string
   onChangeValue?: (e: React.ChangeEvent<HTMLSelectElement>) => void
   value?: number
 }
 
-export const Selects: FC<Props> = ({ label, onChangeValue, value }) => {
+export const Selects: FC<PropsSelect> = ({ label, onChangeValue, value }) => {
   // const [value, setValue] = useState('10')
   const [open, setOpen] = useState(true)
 
