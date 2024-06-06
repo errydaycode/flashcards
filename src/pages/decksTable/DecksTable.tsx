@@ -9,12 +9,15 @@ import {
   Tables,
 } from '@/components/ui/tables'
 import { Deck } from '@/service/decks/decks.type'
+import { useDeleteDecksMutation } from '@/service/flashcards-api'
 
 type Props = {
   data?: Deck[] | undefined
 }
 
 export const DecksTable = ({ data }: Props) => {
+  const [deleteDeck] = useDeleteDecksMutation()
+
   return (
     <>
       <Tables>
@@ -44,7 +47,7 @@ export const DecksTable = ({ data }: Props) => {
                   <Button variant={'link'}>
                     <Icon iconId={'player'} />
                   </Button>
-                  <Button variant={'link'}>
+                  <Button onClick={() => deleteDeck} variant={'link'}>
                     <Icon iconId={'trashDelete'} />
                   </Button>
                 </TableCell>

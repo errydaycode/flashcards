@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button'
 import { Icon } from '@/components/ui/icon'
 import { Input } from '@/components/ui/input'
 import { CustomSlider } from '@/components/ui/slider/Slider'
-import { TabSwitcher } from '@/components/ui/tabs'
+import { Tab } from '@/components/ui/tabs'
 import { Typography } from '@/components/ui/typography'
 
 import styles from './decksListFilter.module.scss'
@@ -20,6 +20,11 @@ export const DecksListFilter = ({ changeValue, search }: Props) => {
   const handleOpenModal = () => {
     setIsModalOpen(!isModalOpen)
   }
+
+  const options = [
+    { title: 'My Cards', value: 'a' },
+    { title: 'All Cards', value: 'c' },
+  ]
 
   return (
     <div className={styles.wrapper}>
@@ -38,7 +43,7 @@ export const DecksListFilter = ({ changeValue, search }: Props) => {
         />
         <div>
           <Typography variant={'body2'}>Show decks cards</Typography>
-          <TabSwitcher />
+          <Tab options={options} />
         </div>
         <div>
           <Typography variant={'body2'}>Number of cards</Typography>
