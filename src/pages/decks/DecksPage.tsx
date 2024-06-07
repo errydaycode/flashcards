@@ -2,8 +2,9 @@ import { ChangeEvent, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 
 import { DecksListFilter } from '@/components/ui/decksListFilter/DecksListFilter'
+import { Header } from '@/components/ui/header/Header'
 import { Pagination } from '@/components/ui/pagination/Pagination'
-import { DecksTable } from '@/pages/decksTable/DecksTable'
+import { DecksTable } from '@/pages/decks/decksTable/DecksTable'
 import { useGetDecksQuery } from '@/service/flashcards-api'
 
 import styles from '@/pages/mainPage/mainPage.module.scss'
@@ -14,6 +15,7 @@ export function DecksPage() {
 
   const [currentPage, setCurrentPage] = useState(1)
   const [itemsPerPage, setItemsPerPage] = useState(10)
+  const [authorId, setAuthorId] = useState('')
 
   const handleSearchChange = (value: string) => {
     if (value.length) {
@@ -36,10 +38,19 @@ export function DecksPage() {
   }
 
   const { data, error, isLoading } = useGetDecksQuery({
+    authorId,
     currentPage,
     itemsPerPage,
     name: search,
   })
+  const filteredCardHandler = (id: string) => {
+    setCurrentPage(1)
+    const selectedDeck = data?.items.find(deck => deck.id === id)
+
+    if (selectedDeck) {
+      setAuthorId(selectedDeck.author.id)
+    }
+  }
 
   if (isLoading) {
     return <div>Loading...</div>
@@ -50,14 +61,21 @@ export function DecksPage() {
 
   return (
     <div>
+      <Header isLogin />
       <div className={styles.mainPage}>
-        <DecksListFilter changeValue={handleSearchChange} search={search} />
+        <DecksListFilter
+          changeValue={handleSearchChange}
+          onChange={filteredCardHandler}
+          search={search}
+          setAuthorId={setAuthorId}
+          value={authorId}
+        />
         <DecksTable data={data?.items} />
         <Pagination
           changeValue={setItemsPerPageHandler}
           currentPage={data?.pagination.currentPage || currentPage}
           onChangePage={onChangePage}
-          pageSize={data?.pagination.totalItems || 1}
+          pageSize={itemsPerPage}
           totalCount={data?.pagination.totalPages || 1}
           value={itemsPerPage}
         />
