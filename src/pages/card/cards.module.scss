@@ -1,0 +1,43 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  margin: 24px 137px 0;
+}
+
+.backToCard {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  width: 137px;
+  height: 24px;
+
+  background: var(--color-dark-900);
+}
+
+.linkBack {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  text-decoration: none;
+
+  p {
+    color: white;
+  }
+
+}
+
+.menu{
+  display: flex;
+  justify-content: space-between;
+  margin-top: 33px;
+}
+
+.inputSearch{
+  margin-top: 50px;
+}
+
+.tableCards{
+  margin-top: 20px;
+}

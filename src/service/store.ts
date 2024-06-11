@@ -1,11 +1,10 @@
+import { decksApi } from '@/service/decks/decks-api'
 import { configureStore } from '@reduxjs/toolkit'
 
-import { flashcardsApi } from './flashcards-api'
-
 export const store = configureStore({
-  middleware: getDefaultMiddleware => getDefaultMiddleware().concat(flashcardsApi.middleware),
+  middleware: getDefaultMiddleware => getDefaultMiddleware().concat(decksApi.middleware),
   reducer: {
-    [flashcardsApi.reducerPath]: flashcardsApi.reducer,
+    [decksApi.reducerPath]: decksApi.reducer,
   },
 })
 

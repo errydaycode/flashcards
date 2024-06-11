@@ -70,7 +70,7 @@ export const Pagination = ({
   return (
     <div className={classNames.container}>
       <button className={classNames.buttonLeft} disabled={isFirstPage} onClick={onPreviousHandler}>
-        <Icon iconId={'ArrowDown'} />
+        <Icon height={'15'} iconId={'ArrowDown'} viewBox={' 0 0 5 10'} width={'5'} />
       </button>
       {paginationRange.map((pageNumber, i) => {
         // If the pageItem is a DOT, render the DOTS unicode character
@@ -100,7 +100,7 @@ export const Pagination = ({
         )
       })}
       <button className={classNames.buttonRight} disabled={isLastPage} onClick={onNextHandler}>
-        <Icon iconId={'ArrowDown'} />
+        <Icon iconId={'ArrowRight'} />
       </button>
       <Typography as={'div'} className={s.selectContainer} variant={'body2'}>
         Показать

@@ -1,4 +1,5 @@
 import { baseApi } from '@/service'
+import { CardArrayResponse, GetCardsArgs } from '@/service/cards/cards-type'
 import {
   CreateDeckArgs,
   Deck,
@@ -8,7 +9,7 @@ import {
   UpdateDeckArgs,
 } from '@/service/decks/decks.type'
 
-export const flashcardsApi = baseApi.injectEndpoints({
+export const decksApi = baseApi.injectEndpoints({
   endpoints: builder => {
     return {
       createDeck: builder.mutation<Deck, CreateDeckArgs>({
@@ -20,6 +21,16 @@ export const flashcardsApi = baseApi.injectEndpoints({
         query: ({ id }) => ({
           method: 'DELETE',
           url: `/v1/decks/${id}`,
+        }),
+      }),
+      getDeckCards: builder.query<
+        CardArrayResponse,
+        { args: GetCardsArgs; id: string | undefined }
+      >({
+        providesTags: ['Cards'],
+        query: ({ args, id }) => ({
+          params: args ?? {},
+          url: `v1/decks/${id}/cards`,
         }),
       }),
       getDecks: builder.query<DecksListResponse, GetDecksArgs>({
@@ -45,6 +56,7 @@ export const flashcardsApi = baseApi.injectEndpoints({
 export const {
   useCreateDeckMutation,
   useDeleteDecksMutation,
+  useGetDeckCardsQuery,
   useGetDecksQuery,
   useUpdateDecksMutation,
-} = flashcardsApi
+} = decksApi

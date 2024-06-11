@@ -8,7 +8,7 @@ import { FormCheckbox } from '@/components/ui/form-utils/form-checkbox'
 import { FormInput } from '@/components/ui/form-utils/form-input'
 import { Icon } from '@/components/ui/icon'
 import { Typography } from '@/components/ui/typography'
-import { useCreateDeckMutation } from '@/service/flashcards-api'
+import { useCreateDeckMutation } from '@/service/decks/decks-api'
 import { z } from 'zod'
 
 import s from './createDeck.module.scss'

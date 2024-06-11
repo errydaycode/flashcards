@@ -12,11 +12,13 @@ import { ForgotPassword } from '@/components/auth/forgotPassword'
 import { SignIn } from '@/components/auth/sign-in'
 import { SignUp } from '@/components/auth/sign-up'
 import { PersonalInformation } from '@/components/ui/personalInformation/PersonalInformation'
+import { Card } from '@/pages/card/Card'
 import { DecksPage } from '@/pages/decks'
 
 const ROUTES = {
   base: '/',
-  checkEmail: 'check-email',
+  cards: '/cards/:id',
+  checkEmail: '/check-email',
   createPassword: '/create-password',
   forgotPassword: '/forgot',
   personalInformation: '/personal-information',
@@ -53,8 +55,8 @@ const privateRoutes: RouteObject[] = [
     path: ROUTES.base,
   },
   {
-    element: <PersonalInformation onSubmit={() => {}} />,
-    path: ROUTES.personalInformation,
+    element: <Card />,
+    path: ROUTES.cards,
   },
   {
     element: <PersonalInformation onSubmit={() => {}} />,

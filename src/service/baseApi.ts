@@ -17,5 +17,5 @@ export const baseApi = createApi({
   }),
   endpoints: () => ({}), // Пустые endpoint точки для базового API
   reducerPath: 'flashcardsApi',
-  tagTypes: ['Me', 'Decks'],
+  tagTypes: ['Me', 'Decks', 'Cards'],
 })

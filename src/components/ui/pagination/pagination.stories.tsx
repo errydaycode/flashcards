@@ -13,6 +13,8 @@ type Story = StoryObj<typeof meta>
 
 export const PaginationComponent: Story = {
   args: {
+    currentPage: 10,
+    onChangePage: () => {},
     pageSize: 2,
     totalCount: 40,
   },

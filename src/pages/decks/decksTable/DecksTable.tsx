@@ -8,8 +8,11 @@ import {
   TableRows,
   Tables,
 } from '@/components/ui/tables'
+import { Typography } from '@/components/ui/typography'
 import { Deck } from '@/service/decks/decks.type'
-import { useDeleteDecksMutation } from '@/service/flashcards-api'
+import { useDeleteDecksMutation } from '@/service/decks/decks-api'
+
+import s from './decksTable.module.scss'
 
 type Props = {
   data?: Deck[] | undefined
@@ -27,15 +30,20 @@ export const DecksTable = ({ data }: Props) => {
             <TableHeadCell>Cards</TableHeadCell>
             <TableHeadCell>last Updated</TableHeadCell>
             <TableHeadCell>Creat By</TableHeadCell>
-            <TableHeadCell>Rating</TableHeadCell>
-            <TableHeadCell>Button mok</TableHeadCell>
+            <TableHeadCell></TableHeadCell>
+            <TableHeadCell></TableHeadCell>
           </TableRows>
         </TableHead>
         <TableBody>
           {data?.map(deck => {
             return (
               <TableRows key={deck.id}>
-                <TableCell>{deck.name}</TableCell>
+                <TableCell className={s.item}>
+                  {deck.cover && <img alt={''} className={s.img} src={deck.cover} />}
+                  <Typography as={'a'} href={`/cards/${deck.id}`} variant={'link1'}>
+                    {deck.name}
+                  </Typography>
+                </TableCell>
                 <TableCell>{deck.cardsCount}</TableCell>
                 <TableCell>{new Date(deck.updated).toLocaleDateString('ru-RU')}</TableCell>
                 <TableCell>{deck.author.name}</TableCell>

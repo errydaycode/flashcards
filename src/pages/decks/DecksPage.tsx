@@ -5,9 +5,9 @@ import { DecksListFilter } from '@/components/ui/decksListFilter/DecksListFilter
 import { Header } from '@/components/ui/header/Header'
 import { Pagination } from '@/components/ui/pagination/Pagination'
 import { DecksTable } from '@/pages/decks/decksTable/DecksTable'
-import { useGetDecksQuery } from '@/service/flashcards-api'
+import { useGetDecksQuery } from '@/service/decks/decks-api'
 
-import styles from '@/pages/mainPage/mainPage.module.scss'
+import styles from './deckPage.module.scss'
 
 export function DecksPage() {
   const [searchParams, setSearchParams] = useSearchParams()

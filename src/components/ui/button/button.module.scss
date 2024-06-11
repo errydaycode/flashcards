@@ -81,3 +81,12 @@
     background: var(--color-dark-300);
   }
 }
+
+.icon {
+  padding: 0;
+  color: var(--color-light-100);
+
+  &:hover {
+    color: var(--color-accent-500);
+  }
+}

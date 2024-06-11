@@ -11,12 +11,7 @@ export type DropDownMenuProps = {
   trigger: ReactNode
 }
 
-export const DropDownMenu = ({
-  children,
-  defaultOpen = false,
-  modal = false,
-  trigger,
-}: DropDownMenuProps) => {
+export const DropDownMenu = ({ children, defaultOpen, modal, trigger }: DropDownMenuProps) => {
   return (
     <DropdownMenu.Root defaultOpen={defaultOpen} modal={modal}>
       <DropdownMenu.Trigger asChild className={s.dropDownMenuTrigger}>
