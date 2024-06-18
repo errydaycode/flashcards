@@ -13,12 +13,12 @@ import s from './sign-in.module.scss'
 
 import { Button } from '../../ui/button'
 
-type FormValues = z.infer<typeof loginSchema>
+export type FormValues = z.infer<typeof loginSchema>
 
 const loginSchema = z.object({
   email: emailSchema,
   password: passwordSchema,
-  rememberMe: z.boolean().optional(),
+  rememberMe: z.boolean().optional().default(false),
 })
 
 type Props = {
@@ -65,7 +65,7 @@ export const SignIn = ({ onSubmit }: Props) => {
         <Typography className={s.questionText} variant={'body2'}>
           {`Don't have an account?`}
         </Typography>
-        <Typography as={'a'} className={s.signUpLink} variant={'link1'}>
+        <Typography as={'a'} className={s.signUpLink} href={`/sing-up`} variant={'link1'}>
           Sign Up
         </Typography>
       </Card>

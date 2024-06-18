@@ -9,7 +9,7 @@ export type LoginResponse = {
   refreshToken: string
 }
 
-export type User = {
+export type getUser = {
   avatar: string
   created: string
   email: string
@@ -17,4 +17,12 @@ export type User = {
   isEmailVerified: boolean
   name: string
   updated: string
+}
+
+export type createUser = {
+  email: string
+  name?: string
+  password: string
+  sendConfirmationEmail?: boolean
+  subject?: string
 }

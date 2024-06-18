@@ -2,7 +2,7 @@ import { ChangeEvent, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 
 import { DecksListFilter } from '@/components/ui/decksListFilter/DecksListFilter'
-import { Header } from '@/components/ui/header/Header'
+import { Header } from '@/components/ui/header'
 import { Pagination } from '@/components/ui/pagination/Pagination'
 import { DecksTable } from '@/pages/decks/decksTable/DecksTable'
 import { useGetDecksQuery } from '@/service/decks/decks-api'

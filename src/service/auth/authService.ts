@@ -1,23 +1,31 @@
 import { baseApi } from '@/service'
-import { LoginArgs, LoginResponse, User } from '@/service/auth/auth.types'
+import { LoginArgs, LoginResponse, createUser, getUser } from '@/service/auth/auth.types'
 
 export const authService = baseApi.injectEndpoints({
   endpoints: builder => {
     return {
-      getMe: builder.query<User | undefined, void>({
-        providesTags: ['Me'],
+      createUser: builder.mutation<getUser, createUser>({
+        invalidatesTags: ['Auth'],
+        query: body => ({
+          body: body,
+          method: 'POST',
+          url: '/v1/auth/sign-up',
+        }),
+      }),
+      getMe: builder.query<getUser, void>({
+        providesTags: ['Auth'],
         query: () => '/v1/auth/me',
       }),
       login: builder.mutation<LoginResponse, LoginArgs>({
-        invalidatesTags: ['Me'],
+        invalidatesTags: ['Auth'],
         async onQueryStarted(_, { queryFulfilled }) {
           const { data } = await queryFulfilled
 
           if (!data) {
             return
           }
-          localStorage.setItem('accessToken', data.accessToken)
-          localStorage.setItem('refreshToken', data.refreshToken)
+          localStorage.setItem('accessToken', data.accessToken.trim())
+          localStorage.setItem('refreshToken', data.refreshToken.trim())
         },
         query: args => ({
           body: args,
@@ -29,4 +37,4 @@ export const authService = baseApi.injectEndpoints({
   },
 })
 
-export const { useGetMeQuery, useLoginMutation } = authService
+export const { useCreateUserMutation, useGetMeQuery, useLoginMutation } = authService

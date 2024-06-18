@@ -31,7 +31,6 @@ export const DecksTable = ({ data }: Props) => {
             <TableHeadCell>last Updated</TableHeadCell>
             <TableHeadCell>Creat By</TableHeadCell>
             <TableHeadCell></TableHeadCell>
-            <TableHeadCell></TableHeadCell>
           </TableRows>
         </TableHead>
         <TableBody>
@@ -47,7 +46,6 @@ export const DecksTable = ({ data }: Props) => {
                 <TableCell>{deck.cardsCount}</TableCell>
                 <TableCell>{new Date(deck.updated).toLocaleDateString('ru-RU')}</TableCell>
                 <TableCell>{deck.author.name}</TableCell>
-                <TableCell></TableCell>
                 <TableCell>
                   <Button variant={'link'}>
                     <Icon iconId={'pencil'} />

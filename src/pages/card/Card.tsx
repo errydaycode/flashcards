@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { ChangeEvent, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 
 import { CreateDeck } from '@/components/modals/createDeck/CreateDeck'
@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button'
 import { Header } from '@/components/ui/header/Header'
 import { Icon } from '@/components/ui/icon'
 import { Input } from '@/components/ui/input'
+import { Pagination } from '@/components/ui/pagination'
 import { Typography } from '@/components/ui/typography'
 import { CardHeader } from '@/pages/card/cardHeader'
 import { CardsTables } from '@/pages/card/cardTables'
@@ -19,8 +20,19 @@ export const Card = () => {
   const { id } = useParams<{ id: string }>()
   const packId = id as string
   const [openModal, setOpenModal] = useState(false)
+  const [currentPage, setCurrentPage] = useState(1)
+  const [itemsPerPage, setItemsPerPage] = useState(10)
+  const onChangePage = (page: number) => {
+    setCurrentPage(page)
+  }
+  const setItemsPerPageHandler = (e: ChangeEvent<HTMLSelectElement>) => {
+    setItemsPerPage(+e.currentTarget.value)
+  }
   const { data } = useGetDeckCardsQuery({
-    args: {},
+    args: {
+      currentPage,
+      itemsPerPage,
+    },
     id: packId as string,
   })
   const handleOpenModal = () => {
@@ -49,6 +61,16 @@ export const Card = () => {
         </div>
         <div className={s.tableCards}>
           <CardsTables cards={data?.items} />
+        </div>
+        <div>
+          <Pagination
+            changeValue={setItemsPerPageHandler}
+            currentPage={data?.pagination.currentPage || currentPage}
+            onChangePage={onChangePage}
+            pageSize={itemsPerPage}
+            totalCount={data?.pagination.totalPages || 1}
+            value={itemsPerPage}
+          />
         </div>
       </div>
     </div>

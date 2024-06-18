@@ -9,13 +9,14 @@ import {
 import { CheckEmail } from '@/components/auth/checkEmail/CheckEmail'
 import { CreateNewPassword } from '@/components/auth/createPassword'
 import { ForgotPassword } from '@/components/auth/forgotPassword'
-import { SignIn } from '@/components/auth/sign-in'
-import { SignUp } from '@/components/auth/sign-up'
 import { PersonalInformation } from '@/components/ui/personalInformation/PersonalInformation'
+import { SingInPage } from '@/pages/auth/sing-in-page'
+import { SingUpPage } from '@/pages/auth/sing-up-page'
 import { Card } from '@/pages/card/Card'
 import { DecksPage } from '@/pages/decks'
+import { useGetMeQuery } from '@/service/auth/authService'
 
-const ROUTES = {
+export const ROUTES = {
   base: '/',
   cards: '/cards/:id',
   checkEmail: '/check-email',
@@ -28,11 +29,11 @@ const ROUTES = {
 
 const publicRoutes: RouteObject[] = [
   {
-    element: <SignIn onSubmit={() => {}} />,
+    element: <SingInPage />,
     path: ROUTES.singIn,
   },
   {
-    element: <SignUp onSubmit={() => {}} />,
+    element: <SingUpPage />,
     path: ROUTES.singUp,
   },
   {
@@ -65,12 +66,13 @@ const privateRoutes: RouteObject[] = [
 ]
 
 function PrivateRoutes() {
-  const isAuthenticated = true
+  const { data } = useGetMeQuery()
+  const isAuthenticated = !!data
 
   return isAuthenticated ? <Outlet /> : <Navigate to={ROUTES.singIn} />
 }
 
-const router = createBrowserRouter([
+export const router = createBrowserRouter([
   {
     children: privateRoutes,
     element: <PrivateRoutes />,
