@@ -1,53 +1,40 @@
-import { useState } from 'react'
+import { ComponentPropsWithoutRef } from 'react'
 
-import { Input } from '@/components/ui/input'
 import * as Slider from '@radix-ui/react-slider'
 
-import style from './slider.module.scss'
+import s from './slider.module.scss'
 
-export const CustomSlider = () => {
-  const [sliderValue, setSliderValue] = useState([25, 75])
+export type Props = {
+  max?: number
+  min?: number
+  onValueChange: (value: number[]) => void
+  value: number[]
+} & ComponentPropsWithoutRef<typeof Slider.Root>
 
-  const handleChangeSliderValue = (value: number[]) => {
-    setSliderValue(value)
-  }
+export const CustomSlider = (props: Props) => {
+  const { className, max = 99, min = 0, onValueChange, value, ...rest } = props
 
-  const handleChangeStartValue = (value: string) => {
-    setSliderValue([+value, sliderValue[1]])
-  }
-  const handleChangeEndValue = (value: string) => {
-    setSliderValue([sliderValue[0], +value])
-  }
+  const minValue = value?.[0] ?? min
+  const maxValue = value?.[1] ?? max
 
   return (
-    <form className={style.slider}>
-      <Input
-        className={style.inputSlider}
-        onValueChange={handleChangeStartValue}
-        type={'number'}
-        value={String(sliderValue[0])}
-        width={'36px'}
-      />
+    <div className={`${s.slider} ${className || ''}`}>
+      <div className={s.value}>{minValue}</div>
       <Slider.Root
-        className={style.SliderRoot}
-        max={100}
-        onValueChange={handleChangeSliderValue}
-        step={1}
-        value={sliderValue}
+        className={s.root}
+        max={max}
+        min={min}
+        onValueChange={value => onValueChange(value)}
+        value={value}
+        {...rest}
       >
-        <Slider.Track className={style.SliderTrack}>
-          <Slider.Range className={style.SliderRange} />
+        <Slider.Track className={s.track}>
+          <Slider.Range className={s.range} />
         </Slider.Track>
-        <Slider.Thumb aria-label={'Volume'} className={style.SliderThumb} />
-        <Slider.Thumb aria-label={'Volume'} className={style.SliderThumb} />
+        <Slider.Thumb aria-label={'Slider Thumb'} className={s.thumb} />
+        <Slider.Thumb aria-label={'Slider Thumb'} className={s.thumb} />
       </Slider.Root>
-      <Input
-        className={style.inputSlider}
-        onValueChange={handleChangeEndValue}
-        type={'number'}
-        value={String(sliderValue[1])}
-        width={'36px'}
-      />
-    </form>
+      <div className={s.value}>{maxValue}</div>
+    </div>
   )
 }

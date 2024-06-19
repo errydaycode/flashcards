@@ -1,62 +1,60 @@
 import { ChangeEvent, useState } from 'react'
-import { useSearchParams } from 'react-router-dom'
 
+import { useDecksSearchParams } from '@/common/hooks/useDecksSearchParams'
 import { DecksListFilter } from '@/components/ui/decksListFilter/DecksListFilter'
 import { Header } from '@/components/ui/header'
 import { Pagination } from '@/components/ui/pagination/Pagination'
 import { DecksTable } from '@/pages/decks/decksTable/DecksTable'
+import { useGetMeQuery } from '@/service/auth/authService'
 import { useGetDecksQuery } from '@/service/decks/decks-api'
 
 import styles from './deckPage.module.scss'
 
 export function DecksPage() {
-  const [searchParams, setSearchParams] = useSearchParams()
-  const search = searchParams.get('search') ?? ''
+  const {
+    changeItemsPerPage,
+    changeMinMaxCard,
+    changeValue,
+    currentPage,
+    itemsPerPage,
+    maxCards,
+    minCards,
+    onChangePage,
+    rangeValue,
+    search,
+  } = useDecksSearchParams()
 
-  const [currentPage, setCurrentPage] = useState(1)
-  const [itemsPerPage, setItemsPerPage] = useState(10)
-  const [authorId, setAuthorId] = useState('')
-
-  const handleSearchChange = (value: string) => {
-    if (value.length) {
-      searchParams.set('search', value)
-    } else {
-      searchParams.delete('search')
-    }
-    setSearchParams(searchParams, { replace: true })
-  }
-
-  const onChangePage = (page: number) => {
-    // Установить новую страницу в параметрах поиска
-    searchParams.set('page', String(page))
-    setCurrentPage(page)
-    setSearchParams(searchParams, { replace: true })
-  }
-
-  const setItemsPerPageHandler = (e: ChangeEvent<HTMLSelectElement>) => {
-    setItemsPerPage(+e.currentTarget.value)
-  }
-
+  const [currentTab, setCurrentTab] = useState('all')
+  const { data: me } = useGetMeQuery()
+  const currentUserId = me?.id
+  const authorId = currentTab === 'my' ? currentUserId : undefined
   const { data, error, isLoading } = useGetDecksQuery({
     authorId,
     currentPage,
     itemsPerPage,
+    maxCardsCount: maxCards,
+    minCardsCount: minCards,
     name: search,
   })
-  const filteredCardHandler = (id: string) => {
-    setCurrentPage(1)
-    const selectedDeck = data?.items.find(deck => deck.id === id)
 
-    if (selectedDeck) {
-      setAuthorId(selectedDeck.author.id)
-    }
+  const handleTabChange = (tab: string) => {
+    onChangePage(1)
+    setCurrentTab(tab)
+  }
+  const setItemsPerPageHandler = (e: ChangeEvent<HTMLSelectElement>) => {
+    changeItemsPerPage(e.currentTarget.value)
+  }
+  const clearFilterHandler = () => {
+    changeMinMaxCard([0, 50])
+    setCurrentTab('all')
+    changeValue('')
   }
 
   if (isLoading) {
     return <div>Loading...</div>
   }
   if (error) {
-    return <h1>Erorr: {JSON.stringify(error)}</h1>
+    return <h1>Error: {JSON.stringify(error)}</h1>
   }
 
   return (
@@ -64,13 +62,17 @@ export function DecksPage() {
       <Header isLogin />
       <div className={styles.mainPage}>
         <DecksListFilter
-          changeValue={handleSearchChange}
-          onChange={filteredCardHandler}
+          changeMinMaxCard={changeMinMaxCard}
+          changeValue={changeValue}
+          clearFilterHandler={clearFilterHandler}
+          onChange={handleTabChange}
+          rangeValue={rangeValue}
           search={search}
-          setAuthorId={setAuthorId}
-          value={authorId}
+          value={currentTab}
         />
+
         <DecksTable data={data?.items} />
+
         <Pagination
           changeValue={setItemsPerPageHandler}
           currentPage={data?.pagination.currentPage || currentPage}

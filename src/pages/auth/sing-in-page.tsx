@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom'
+import { Navigate } from 'react-router-dom'
 
 import { SignIn } from '@/components/auth/sign-in'
 import { ROUTES } from '@/routes'
@@ -8,14 +8,13 @@ import { useGetMeQuery, useLoginMutation } from '@/service/auth/authService'
 export const SingInPage = () => {
   const [login] = useLoginMutation()
   const { data: me } = useGetMeQuery()
-  const navigate = useNavigate()
 
   const onSubmit = async (data: LoginArgs) => {
     await login(data).unwrap()
   }
 
   if (me) {
-    navigate(ROUTES.base)
+    return <Navigate replace to={ROUTES.base} />
   }
 
   return (

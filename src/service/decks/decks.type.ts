@@ -49,3 +49,8 @@ export type UpdateDeckArgs = {
 export interface DeleteDeck {
   id: string
 }
+
+export interface MinMaxCardsResponse {
+  max: number
+  min: number
+}

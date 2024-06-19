@@ -14,7 +14,6 @@ type TabProps = {
   value?: string
 }
 export type OptionsType = {
-  onClick: () => void
   title: string
   value: string
 }
@@ -32,7 +31,6 @@ export const Tab: FC<TabProps> = ({ disabled, label, onChange, options, value })
           className={s.tabsTrigger}
           disabled={disabled}
           key={option.value}
-          onClick={option.onClick}
           value={option.value}
         >
           <Typography variant={'body1'}>{option.title}</Typography>

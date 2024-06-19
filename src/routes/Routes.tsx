@@ -66,8 +66,12 @@ const privateRoutes: RouteObject[] = [
 ]
 
 function PrivateRoutes() {
-  const { data } = useGetMeQuery()
+  const { data, isLoading } = useGetMeQuery()
   const isAuthenticated = !!data
+
+  if (isLoading) {
+    return null
+  }
 
   return isAuthenticated ? <Outlet /> : <Navigate to={ROUTES.singIn} />
 }

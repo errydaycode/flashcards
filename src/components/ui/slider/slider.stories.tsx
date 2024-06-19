@@ -1,14 +1,25 @@
-import type { Meta, StoryObj } from '@storybook/react'
+import { useState } from 'react'
 
-import { CustomSlider } from './Slider'
+import { Meta, StoryObj } from '@storybook/react'
 
-const meta = {
+import { CustomSlider, Props } from './Slider' // Make sure this path is correct
+
+const meta: Meta<typeof CustomSlider> = {
   component: CustomSlider,
   tags: ['autodocs'],
-  title: 'Components/UI/CustomSlider',
-} satisfies Meta<typeof CustomSlider>
+  title: 'Components/UI/Slider',
+}
 
 export default meta
-type Story = StoryObj<typeof meta>
 
-export const Slider: Story = {}
+export const Default: StoryObj<typeof CustomSlider> = (args: Props) => {
+  const [value, setValue] = useState<number[]>(args.value)
+
+  return <CustomSlider {...args} onValueChange={setValue} value={value} />
+}
+
+Default.args = {
+  max: 99,
+  min: 1,
+  value: [2, 50],
+}
