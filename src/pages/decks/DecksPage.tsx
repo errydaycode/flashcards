@@ -1,8 +1,8 @@
 import { ChangeEvent, useState } from 'react'
 
 import { useDecksSearchParams } from '@/common/hooks/useDecksSearchParams'
+import { Page } from '@/components/Page'
 import { DecksListFilter } from '@/components/ui/decksListFilter/DecksListFilter'
-import { Header } from '@/components/ui/header'
 import { Pagination } from '@/components/ui/pagination/Pagination'
 import { DecksTable } from '@/pages/decks/decksTable/DecksTable'
 import { useGetMeQuery } from '@/service/auth/authService'
@@ -58,8 +58,7 @@ export function DecksPage() {
   }
 
   return (
-    <div>
-      <Header isLogin />
+    <Page style={{ marginTop: '25px' }}>
       <div className={styles.mainPage}>
         <DecksListFilter
           changeMinMaxCard={changeMinMaxCard}
@@ -82,6 +81,6 @@ export function DecksPage() {
           value={itemsPerPage}
         />
       </div>
-    </div>
+    </Page>
   )
 }

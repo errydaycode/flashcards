@@ -46,6 +46,10 @@ export const decksApi = baseApi.injectEndpoints({
         providesTags: ['Decks'],
         query: () => '/v2/decks/min-max-cards',
       }),
+      getOneDeck: builder.query<Deck, { id: string }>({
+        providesTags: ['Decks'],
+        query: ({ id }) => `v1/decks/${id}`,
+      }),
       updateDecks: builder.mutation<Deck, UpdateDeckArgs>({
         invalidatesTags: ['Decks'],
         query: ({ id, ...body }) => ({
@@ -64,5 +68,6 @@ export const {
   useGetDeckCardsQuery,
   useGetDecksQuery,
   useGetMinMaxDecksQuery,
+  useGetOneDeckQuery,
   useUpdateDecksMutation,
 } = decksApi

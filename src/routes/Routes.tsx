@@ -6,15 +6,16 @@ import {
   createBrowserRouter,
 } from 'react-router-dom'
 
+import { useAppOutletContext } from '@/common/hooks/useOutletContext'
 import { CheckEmail } from '@/components/auth/checkEmail/CheckEmail'
 import { CreateNewPassword } from '@/components/auth/createPassword'
 import { ForgotPassword } from '@/components/auth/forgotPassword'
+import { Layout } from '@/components/layout/Layout'
 import { PersonalInformation } from '@/components/ui/personalInformation/PersonalInformation'
 import { SingInPage } from '@/pages/auth/sing-in-page'
 import { SingUpPage } from '@/pages/auth/sing-up-page'
 import { Card } from '@/pages/card/Card'
 import { DecksPage } from '@/pages/decks'
-import { useGetMeQuery } from '@/service/auth/authService'
 
 export const ROUTES = {
   base: '/',
@@ -66,22 +67,23 @@ const privateRoutes: RouteObject[] = [
 ]
 
 function PrivateRoutes() {
-  const { data, isLoading } = useGetMeQuery()
-  const isAuthenticated = !!data
+  const { isAuth } = useAppOutletContext()
 
-  if (isLoading) {
-    return null
-  }
-
-  return isAuthenticated ? <Outlet /> : <Navigate to={ROUTES.singIn} />
+  return isAuth ? <Outlet /> : <Navigate to={ROUTES.singIn} />
 }
 
 export const router = createBrowserRouter([
   {
-    children: privateRoutes,
-    element: <PrivateRoutes />,
+    children: [
+      {
+        children: privateRoutes,
+        element: <PrivateRoutes />,
+      },
+      ...publicRoutes,
+    ],
+    element: <Layout />,
+    path: ROUTES.base,
   },
-  ...publicRoutes,
 ])
 
 export function Router() {
